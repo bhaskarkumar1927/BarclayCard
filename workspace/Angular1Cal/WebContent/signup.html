@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"
+	rel="stylesheet" data-semver="3.3.7" data-require="bootstrap-css@3.3.7" />
+<script data-require="angular.js@1.4.8" data-semver="1.4.8"
+	src="https://code.angularjs.org/1.4.8/angular.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.rawgit.com/esvit/ng-table/v0.8.3/dist/ng-table.css" />
+<script
+	src="https://cdn.rawgit.com/esvit/ng-table/v0.8.3/dist/ng-table.min.js"></script>
+
+
+
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="postController" class="container">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="page-header">
+				<h2>Welcome to Angular1 World !!</h2>
+			</div>
+			<!-- FORM -->
+			<form name="userForm">
+				<div class="form-group">
+					<label>First Name:</label> <input type="text" name="firstName"
+						class="form-control" ng-model="FirstName" required>
+				</div>
+				<div class="form-group">
+					<label>Last Name:</label> <input type="text" name="lastName"
+						class="form-control" ng-model="LastName" required>
+				</div>
+				<div class="form-group">
+					<label>Email:</label> <input type="email" name="email"
+						class="form-control" ng-model="Email" required>
+				</div>
+				<div class="form-group">
+					<label>Date Time</label> <input type="text" name="datetime"
+						placeholder="Fri Dec 26 11:13:47 EDT 2016" class="form-control"
+						ng-model="DateTime">
+				</div>
+				<button type="button" class="btn btn-primary"
+					ng-click="submitForm1()">submit</button>
+				<button type="reset" class="btn btn-primary"
+					ng-click="submitForm2()">Reset</button>
+				<!-- <button type="button" class="btn btn-primary"
+					ng-click="submitForm3()">View All</button> -->
+				<br>
+				<div>
+					<h4>{{result}}</h4>
+
+					<br>
+
+					<!-- <table ng-table="tableParams" class="table" show-filter="true">
+						<tr ng-repeat="x in $data">
+							<td title="'Subject'" filter="{ subject:'text'}"
+								sortable="'subject'">{{x.subject}}</td>
+							<td title="'CREATED_TIME'">{{x.dateAdded}}</td>
+
+						</tr>
+					</table> -->
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		// Defining angularjs application.
+		var postApp = angular.module('myApp', [ "ngTable" ]);
+		// Controller function and passing $http service and $scope var.
+		postApp.controller('postController', function postCtrl($scope, $http,
+				NgTableParams) {
+			// create a blank object to handle form data.
+			$scope.DateTime = "Wed Feb 14 11:13:47 EDT 2016";
+
+			$scope.tableParams = new NgTableParams({}, {
+				data : $scope.tableData
+			});
+
+			// calling our submit function.
+
+
+			$scope.submitForm1 = function() {
+				var subject = $scope.Subject;
+				var dateTime = $scope.DateTime;
+				var firstName=$scope.FirstName;
+				var lastName= $scope.LastName;
+				var email= $scope.Email;
+
+				$http(
+						{
+							method : 'POST',
+							url : "./updateExcelData?firstName="
+									+ firstName + "&lastName=" + lastName
+									+"&email"+ email + "&date=" + dateTime
+									,
+
+						}).success(function(data) {
+					$scope.result = data.msg;
+				});
+			};
+
+
+
+		});
+	</script>
+</body>
+</html>

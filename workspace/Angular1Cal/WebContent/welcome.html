@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"
+	rel="stylesheet" data-semver="3.3.7" data-require="bootstrap-css@3.3.7" />
+<script data-require="angular.js@1.4.8" data-semver="1.4.8"
+	src="https://code.angularjs.org/1.4.8/angular.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.rawgit.com/esvit/ng-table/v0.8.3/dist/ng-table.css" />
+<script
+	src="https://cdn.rawgit.com/esvit/ng-table/v0.8.3/dist/ng-table.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl" class="container">
+<h2>Welcome + firstName + LastName!!!</h2>
+<div class="form-group">				
+<label>First Number:</label> <input type="number" name="firstNumber" class="form-control" ng-model="a">
+</div>
+<div>
+<label>Second Number:</label> <input type="number" name="secondNumber" class="form-control" ng-model="b">
+</div>
+<div>
+<label>Select Operation:</label>
+<select class="form-control" ng-model="operator">
+        <option selected>+</option>
+        <option>*</option>
+        <option>-</option>
+        <option>/</option>
+</select>
+</div></br>
+  
+ <button type="button" class="btn btn-primary"
+					ng-click="submitForm2()">submit</button>
+<h1>{{result}}</h1>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstname = "John";
+    $scope.submitForm2 = function() {
+        if($scope.operator=='+')
+        	$scope.result = $scope.a+$scope.b;
+        else if($scope.operator=='-')
+        	$scope.result = $scope.a-$scope.b;
+        else if($scope.operator=='*')
+        	$scope.result = $scope.a*$scope.b;
+        else if($scope.operator=='/')
+        	$scope.result = $scope.a/$scope.b;
+    }
+});
+</script>
+
+</body>
+</html>
